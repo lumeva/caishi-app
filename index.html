@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>彩时</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <div class="app-shell">
+    <header class="hero-card">
+      <div>
+        <p class="eyebrow">彩时</p>
+        <h1>多彩或者充实的日子</h1>
+        <p class="hero-copy">先看到任务，再决定今天过成什么颜色。</p>
+      </div>
+      <button class="pill-button subtle-button" id="new-task-top-button" type="button">新建任务</button>
+    </header>
+
+    <main class="views">
+      <section class="view active" id="view-today" data-view="today">
+        <section class="glass-card active-card hidden" id="active-card">
+          <div class="section-heading compact">
+            <div>
+              <p class="eyebrow">正在进行</p>
+              <h2 id="active-task-title">数学 · 做题</h2>
+            </div>
+            <div class="active-actions">
+              <button class="pill-button subtle-button" id="set-target-button" type="button">设目标结束</button>
+              <button class="pill-button danger-button" id="end-session-button" type="button">结束</button>
+            </div>
+          </div>
+          <div class="active-metrics">
+            <div>
+              <span class="metric-label">开始时间</span>
+              <strong id="active-start-time">10:00</strong>
+            </div>
+            <div>
+              <span class="metric-label">已进行</span>
+              <strong id="active-duration">00:00:00</strong>
+            </div>
+            <div id="active-target-block" class="hidden">
+              <span class="metric-label" id="active-target-label">目标结束</span>
+              <strong id="active-target-time">12:00</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="glass-card">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">任务区</p>
+              <h2>第一眼先看到任务</h2>
+            </div>
+            <button class="pill-button" id="quick-manual-button" type="button">手动补录</button>
+          </div>
+
+          <label class="search-field" for="task-search">
+            <span>🔍</span>
+            <input id="task-search" type="search" placeholder="添加任务，支持联动历史记录">
+          </label>
+
+          <div class="suggestion-list hidden" id="search-suggestions"></div>
+
+          <div class="task-block-header">
+            <h3>常用任务</h3>
+            <p id="task-block-hint">点击开始直接计时，也可以补录或加入计划。</p>
+          </div>
+
+          <div class="task-list" id="task-list"></div>
+        </section>
+
+        <div class="dashboard-grid">
+          <section class="glass-card primary-visual">
+            <div class="section-heading compact">
+              <div>
+                <p class="eyebrow">今日实际</p>
+                <h2>实时饼图时钟</h2>
+              </div>
+              <div class="summary-chip" id="today-total">已记录 0 分钟</div>
+            </div>
+
+            <div class="pie-layout">
+              <div class="clock-card">
+                <div class="pie-dial pie-large" id="actual-pie">
+                  <span class="clock-mark mark-top">00</span>
+                  <span class="clock-mark mark-right">06</span>
+                  <span class="clock-mark mark-bottom">12</span>
+                  <span class="clock-mark mark-left">18</span>
+                  <div class="pie-center">
+                    <span>实际</span>
+                    <strong id="actual-pie-center">0分</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="legend" id="actual-legend"></div>
+            </div>
+
+            <div class="timeline" id="today-timeline"></div>
+          </section>
+
+          <section class="glass-card secondary-visual">
+            <div class="section-heading compact">
+              <div>
+                <p class="eyebrow">计划参考</p>
+                <h2>轻量计划饼图</h2>
+              </div>
+              <button class="pill-button subtle-button" id="add-plan-button" type="button">添加计划</button>
+            </div>
+
+            <div class="plan-overview">
+              <div class="pie-dial pie-small" id="plan-pie">
+                <span class="clock-mark mark-top">00</span>
+                <span class="clock-mark mark-right">06</span>
+                <span class="clock-mark mark-bottom">12</span>
+                <span class="clock-mark mark-left">18</span>
+                <div class="pie-center">
+                  <span>计划</span>
+                  <strong id="plan-pie-center">0分</strong>
+                </div>
+              </div>
+
+              <div class="plan-meta">
+                <div class="summary-chip muted-chip" id="plan-total">今天计划 0 分钟</div>
+                <p>它只作为参考，不抢首页主视觉。</p>
+              </div>
+            </div>
+
+            <div class="plan-list" id="plan-list"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="view-stats" data-view="stats">
+        <section class="glass-card">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">统计</p>
+              <h2>看一天、一周、一个月，或自选范围</h2>
+            </div>
+          </div>
+
+          <div class="range-preset-group" id="range-presets">
+            <button class="range-pill active" type="button" data-range="day">今日</button>
+            <button class="range-pill" type="button" data-range="week">本周</button>
+            <button class="range-pill" type="button" data-range="month">本月</button>
+            <button class="range-pill" type="button" data-range="custom">自选</button>
+          </div>
+
+          <div class="filter-grid">
+            <label>
+              起始日期
+              <input id="stats-start-date" type="date">
+            </label>
+            <label>
+              结束日期
+              <input id="stats-end-date" type="date">
+            </label>
+            <label>
+              一级分类
+              <select id="stats-folder-filter"></select>
+            </label>
+            <label>
+              二级分类
+              <select id="stats-category-filter"></select>
+            </label>
+            <label>
+              任务
+              <select id="stats-task-filter"></select>
+            </label>
+          </div>
+
+          <div class="stats-cards">
+            <article class="stat-card">
+              <span>实际时长</span>
+              <strong id="stats-total-duration">0分</strong>
+            </article>
+            <article class="stat-card">
+              <span>计划时长</span>
+              <strong id="stats-plan-duration">0分</strong>
+            </article>
+            <article class="stat-card">
+              <span>完成度</span>
+              <strong id="stats-completion-rate">0%</strong>
+            </article>
+            <article class="stat-card">
+              <span>活跃天数</span>
+              <strong id="stats-active-days">0天</strong>
+            </article>
+          </div>
+        </section>
+
+        <div class="dashboard-grid stats-grid">
+          <section class="glass-card">
+            <div class="section-heading compact">
+              <div>
+                <p class="eyebrow">时间分布</p>
+                <h2>这个范围里都花在哪</h2>
+              </div>
+            </div>
+            <div class="breakdown-list" id="stats-breakdown"></div>
+          </section>
+
+          <section class="glass-card">
+            <div class="section-heading compact">
+              <div>
+                <p class="eyebrow">按天展开</p>
+                <h2>每天的投入节奏</h2>
+              </div>
+            </div>
+            <div class="bar-chart" id="stats-bar-chart"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="view-settings" data-view="settings">
+        <section class="glass-card">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">设置</p>
+              <h2>管理任务模板和本地数据</h2>
+            </div>
+          </div>
+
+          <div class="stats-cards settings-cards">
+            <article class="stat-card">
+              <span>任务模板</span>
+              <strong id="settings-task-count">0</strong>
+            </article>
+            <article class="stat-card">
+              <span>记录条目</span>
+              <strong id="settings-entry-count">0</strong>
+            </article>
+            <article class="stat-card">
+              <span>今日计划</span>
+              <strong id="settings-plan-count">0</strong>
+            </article>
+          </div>
+
+          <div class="settings-actions">
+            <button class="pill-button" id="settings-new-task-button" type="button">新建任务</button>
+            <button class="pill-button subtle-button" id="seed-demo-button" type="button">载入示例计划</button>
+            <button class="pill-button subtle-button" id="export-data-button" type="button">导出数据</button>
+            <button class="pill-button danger-button" id="clear-today-button" type="button">清空今天记录</button>
+          </div>
+
+          <div class="settings-note">
+            <strong>层级规则</strong>
+            <p>一级分类仅作为像文件夹那样的归档层，不会在首页任务选择里抢视线；首页主要展示二级分类和具体任务。</p>
+          </div>
+
+          <div class="task-directory" id="settings-task-directory"></div>
+        </section>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="主导航">
+      <button class="nav-item active" type="button" data-view-target="today"><span>今日</span></button>
+      <button class="nav-item" type="button" data-view-target="stats"><span>统计</span></button>
+      <button class="nav-item" type="button" data-view-target="settings"><span>设置</span></button>
+    </nav>
+  </div>
+
+  <div class="modal hidden" id="task-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">任务模板</p>
+          <h2>新建一个常用任务</h2>
+        </div>
+        <button class="icon-button" type="button" data-close-modal="task-modal">✕</button>
+      </div>
+
+      <form id="task-form" class="modal-form">
+        <label>
+          一级分类（文件夹）
+          <input name="folder" type="text" placeholder="例如：学习 / 生活">
+        </label>
+        <label>
+          二级分类
+          <input name="category" type="text" placeholder="例如：数学" required>
+        </label>
+        <label>
+          具体任务
+          <input name="action" type="text" placeholder="例如：做题" required>
+        </label>
+        <label>
+          标签
+          <input name="tags" type="text" placeholder="用逗号分隔，例如：真题, 函数">
+        </label>
+        <label>
+          循环
+          <select name="repeat">
+            <option value="none">不循环</option>
+            <option value="daily">每天</option>
+            <option value="weekdays">工作日</option>
+            <option value="weekly">每周固定</option>
+          </select>
+        </label>
+        <label>
+          颜色
+          <input name="color" type="color" value="#4e7bff">
+        </label>
+        <button class="pill-button submit-button" type="submit">保存任务</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="entry-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow" id="entry-modal-eyebrow">补录</p>
+          <h2 id="entry-modal-title">记录一段时间</h2>
+        </div>
+        <button class="icon-button" type="button" data-close-modal="entry-modal">✕</button>
+      </div>
+
+      <form id="entry-form" class="modal-form">
+        <input type="hidden" name="taskId">
+        <input type="hidden" name="mode">
+        <div class="selected-task-banner" id="entry-task-banner"></div>
+        <label>
+          日期
+          <input name="date" type="date" required>
+        </label>
+        <div class="two-column">
+          <label>
+            开始
+            <input name="startTime" type="time" required>
+          </label>
+          <label>
+            结束
+            <input name="endTime" type="time" required>
+          </label>
+        </div>
+        <label class="checkbox-row hidden" id="entry-complete-row">
+          <input name="completed" type="checkbox">
+          <span>这个计划项默认记为已完成</span>
+        </label>
+        <button class="pill-button submit-button" type="submit">保存</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
