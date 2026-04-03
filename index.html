@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>彩时</title>
+  <title>Caishi</title>
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -17,47 +17,41 @@
       <section class="view active" data-view="home">
         <header class="home-head">
           <div>
-            <p class="home-date" id="today-label">4月3日 星期五</p>
-            <h1>Today</h1>
+            <p class="home-date" id="today-label">Apr 3 · Friday</p>
+            <h1 data-i18n="home.title">Today</h1>
           </div>
         </header>
 
         <section class="panel next-panel">
-          <div class="section-head">
-            <div>
-              <p class="section-kicker">Next</p>
-              <h2>从时间线里抽出最该开始的几件事</h2>
-            </div>
+          <div class="section-head simple">
+            <h2 data-i18n="home.next">Next</h2>
           </div>
           <div class="next-track" id="next-track"></div>
           <div class="page-dots" id="next-dots"></div>
         </section>
 
         <section class="panel todo-panel">
-          <div class="section-head">
-            <div>
-              <p class="section-kicker">To-Do List</p>
-              <h2>按时间线排今天</h2>
-            </div>
+          <div class="section-head simple">
+            <h2 data-i18n="home.todo">To-Do List</h2>
           </div>
 
           <section class="todo-group hidden" id="overdue-group">
             <div class="group-head">
-              <h3>⚠️ Overdue</h3>
+              <h3 data-i18n="home.overdue">Overdue</h3>
             </div>
             <div class="todo-list" id="overdue-list"></div>
           </section>
 
           <section class="todo-group">
             <div class="group-head">
-              <h3>Today</h3>
+              <h3 data-i18n="home.todayGroup">Today</h3>
             </div>
             <div class="todo-list" id="today-list"></div>
           </section>
 
           <section class="todo-group">
             <div class="group-head">
-              <h3>Flexible</h3>
+              <h3 data-i18n="home.flexible">Flexible</h3>
             </div>
             <div class="todo-list" id="flexible-list"></div>
           </section>
@@ -65,7 +59,7 @@
 
         <details class="panel completed-panel" id="completed-panel">
           <summary>
-            <span>已完成</span>
+            <span data-i18n="home.completed">Completed</span>
             <span class="completed-count" id="completed-count">0</span>
           </summary>
           <div class="completed-list" id="completed-list"></div>
@@ -74,31 +68,33 @@
 
       <section class="view" data-view="stats">
         <section class="panel stats-panel">
-          <div class="page-head centered">
-            <p class="section-kicker">Today's Color</p>
-            <h2>今天的时间都染成了什么颜色</h2>
-          </div>
-          <div class="preset-row" id="range-presets">
-            <button class="range-pill active" type="button" data-range="day">今日</button>
-            <button class="range-pill" type="button" data-range="week">本周</button>
-            <button class="range-pill" type="button" data-range="month">本月</button>
-            <button class="range-pill" type="button" data-range="custom">自选</button>
+          <div class="page-head centered compact-head">
+            <h1 data-i18n="stats.title">Today's Color</h1>
           </div>
 
+          <div class="preset-row" id="range-presets">
+            <button class="range-pill active" type="button" data-range="day" data-i18n="stats.today">Today</button>
+            <button class="range-pill" type="button" data-range="week" data-i18n="stats.week">Week</button>
+            <button class="range-pill" type="button" data-range="month" data-i18n="stats.month">Month</button>
+            <button class="range-pill" type="button" data-range="custom" data-i18n="stats.custom">Custom</button>
+          </div>
+
+          <div class="stats-day-strip hidden" id="stats-day-strip"></div>
+
           <section class="stats-ring-card">
-            <div class="stats-donut-wrap" id="stats-donut-wrap">
-              <svg class="stats-donut-svg" id="stats-donut" viewBox="0 0 240 240" aria-label="统计圆环"></svg>
+            <div class="stats-donut-wrap stats-clock-wrap" id="stats-donut-wrap">
+              <svg class="stats-donut-svg" id="stats-donut" viewBox="0 0 260 260" aria-label="Color clock"></svg>
               <div class="stats-center">
                 <strong id="stats-total-duration">0m</strong>
-                <span id="stats-total-label">Tracked today</span>
+                <span id="stats-total-label" data-i18n="stats.trackedToday">Tracked today</span>
               </div>
               <div class="stats-callout hidden" id="stats-callout"></div>
             </div>
           </section>
 
           <div class="stats-mode-row">
-            <button class="mode-pill active" type="button" data-stats-mode="category">By Category</button>
-            <button class="mode-pill" type="button" data-stats-mode="task">By Task</button>
+            <button class="mode-pill active" type="button" data-stats-mode="category" data-i18n="stats.byCategory">By Category</button>
+            <button class="mode-pill" type="button" data-stats-mode="task" data-i18n="stats.byTask">By Task</button>
           </div>
 
           <div class="stats-filter-row">
@@ -112,11 +108,11 @@
 
           <div class="stats-range hidden" id="stats-custom-range">
             <label>
-              开始
+              <span data-i18n="stats.start">Start</span>
               <input id="stats-start-date" type="date">
             </label>
             <label>
-              结束
+              <span data-i18n="stats.end">End</span>
               <input id="stats-end-date" type="date">
             </label>
           </div>
@@ -124,7 +120,7 @@
           <div class="stats-detail-list" id="stats-detail-list"></div>
 
           <details class="trend-fold">
-            <summary>Show weekly trend ></summary>
+            <summary data-i18n="stats.trend">Show weekly trend ></summary>
             <div class="trend-chart" id="stats-trend-chart"></div>
           </details>
         </section>
@@ -133,32 +129,49 @@
       <section class="view" data-view="tasks">
         <section class="panel tasks-panel">
           <div class="tasks-topbar">
-            <div>
-              <p class="section-kicker">Task Structure</p>
-              <h2>Tasks</h2>
+            <h1 data-i18n="tasks.title">Tasks</h1>
+            <div class="tasks-top-actions">
+              <button class="icon-button" id="open-template-sheet" type="button" aria-label="Add task item">+</button>
+              <button class="text-link" id="toggle-task-edit" type="button" data-i18n="tasks.edit">Edit</button>
             </div>
-            <button class="text-link" id="toggle-task-edit" type="button">Edit</button>
           </div>
 
-          <button class="new-category-row" id="open-template-sheet" type="button">
-            <span>＋</span>
-            <strong>New Category</strong>
-          </button>
-
-          <p class="helper-copy task-helper">二级分类绑定颜色，三级任务继承颜色。</p>
           <div class="task-tree-list" id="task-tree"></div>
+        </section>
+      </section>
+
+      <section class="view" data-view="settings">
+        <section class="panel settings-panel">
+          <div class="page-head compact-head">
+            <h1 data-i18n="settings.title">Settings</h1>
+          </div>
+
+          <section class="settings-group">
+            <h2 data-i18n="settings.language">Language</h2>
+            <div class="language-grid">
+              <button class="language-button active" type="button" data-language="en">English</button>
+              <button class="language-button" type="button" data-language="zh-Hans">简体中文</button>
+              <button class="language-button" type="button" data-language="zh-Hant">繁體中文</button>
+            </div>
+          </section>
+
+          <section class="settings-group subtle-group">
+            <h2 data-i18n="settings.about">About</h2>
+            <p class="settings-copy" data-i18n="settings.aboutCopy">Caishi keeps your day readable through color and time.</p>
+          </section>
         </section>
       </section>
     </main>
 
-    <button class="fab" id="open-action-sheet" type="button" aria-label="添加">
+    <button class="fab" id="open-action-sheet" type="button" aria-label="Add task">
       <span>+</span>
     </button>
 
-    <nav class="bottom-nav" aria-label="主导航">
-      <button class="nav-item active" type="button" data-view-target="home">首页</button>
-      <button class="nav-item" type="button" data-view-target="stats">统计</button>
-      <button class="nav-item" type="button" data-view-target="tasks">任务</button>
+    <nav class="bottom-nav" aria-label="Primary">
+      <button class="nav-item active" type="button" data-view-target="home" data-i18n="nav.home">Home</button>
+      <button class="nav-item" type="button" data-view-target="stats" data-i18n="nav.stats">Stats</button>
+      <button class="nav-item" type="button" data-view-target="tasks" data-i18n="nav.tasks">Tasks</button>
+      <button class="nav-item" type="button" data-view-target="settings" data-i18n="nav.settings">Settings</button>
     </nav>
   </div>
 
@@ -166,24 +179,20 @@
 
   <div class="sheet-layer hidden" id="action-sheet">
     <div class="sheet-scrim" data-close-sheet="action-sheet"></div>
-    <div class="sheet-panel action-panel">
+    <div class="sheet-panel action-panel compact-panel">
       <div class="sheet-handle"></div>
-      <div class="action-grid">
+      <div class="action-grid compact-actions">
         <button class="action-card" type="button" data-open-sheet="create-sheet">
-          <strong>Create Task</strong>
-          <span>排进今天的时间线里</span>
+          <strong data-i18n="action.create">Create Task</strong>
+          <span data-i18n="action.createCopy">Plan it for today</span>
         </button>
         <button class="action-card" type="button" data-open-sheet="quick-sheet">
-          <strong>Quick Task</strong>
-          <span>不填分类，直接开始</span>
+          <strong data-i18n="action.quick">Quick Start</strong>
+          <span data-i18n="action.quickCopy">Search or type and start</span>
         </button>
         <button class="action-card" type="button" data-open-sheet="log-sheet">
-          <strong>Log Time</strong>
-          <span>补录一段已经发生的时间</span>
-        </button>
-        <button class="action-card" type="button" data-open-sheet="start-sheet">
-          <strong>Start Timer</strong>
-          <span>选一个任务，马上进入计时</span>
+          <strong data-i18n="action.log">Log Time</strong>
+          <span data-i18n="action.logCopy">Save time that already happened</span>
         </button>
       </div>
     </div>
@@ -192,48 +201,47 @@
   <div class="sheet-layer hidden" id="create-sheet">
     <div class="sheet-scrim" data-close-sheet="create-sheet"></div>
     <div class="sheet-panel form-panel expandable-sheet" id="create-sheet-panel">
-      <button class="sheet-handle drag-handle" id="create-sheet-handle" type="button" aria-label="展开创建任务面板"></button>
-      <div class="sheet-head">
+      <button class="sheet-handle drag-handle" id="create-sheet-handle" type="button" aria-label="Expand create task panel"></button>
+      <div class="sheet-head minimal-head">
         <div>
-          <p class="sheet-kicker">Create Task</p>
-          <h2>轻量地加进今天</h2>
+          <h2 data-i18n="sheet.create">Create Task</h2>
         </div>
-        <button class="sheet-close" type="button" data-close-sheet="create-sheet">✕</button>
+        <button class="sheet-close" type="button" data-close-sheet="create-sheet">×</button>
       </div>
 
       <form id="create-form" class="line-form">
         <input name="taskId" type="hidden">
         <label class="field-block">
-          <span>Task Name</span>
-          <input name="title" type="text" list="task-name-suggestions" placeholder="例如：数学做题" required>
+          <span data-i18n="field.taskName">Task Name</span>
+          <input name="title" type="text" list="task-name-suggestions" data-i18n-placeholder="placeholder.taskName" placeholder="Study Math" required>
         </label>
 
         <button class="select-row" id="create-category-button" type="button">
-          <span>Category</span>
-          <strong id="create-category-value">可选</strong>
+          <span data-i18n="field.category">Category</span>
+          <strong id="create-category-value" data-i18n="field.optional">Optional</strong>
         </button>
 
         <label class="field-block inline-field">
-          <span>Time (optional)</span>
+          <span data-i18n="field.timeOptional">Time (optional)</span>
           <input name="startTime" type="time">
         </label>
 
         <label class="field-block inline-field">
-          <span>Duration (optional)</span>
+          <span data-i18n="field.durationOptional">Duration (optional)</span>
           <input name="durationMinutes" type="number" min="5" step="5" placeholder="30">
         </label>
 
         <section class="field-block color-field">
-          <span>Color</span>
+          <span data-i18n="field.color">Color</span>
           <div class="palette-picker compact-picker" id="create-color-picker"></div>
         </section>
 
         <label class="toggle-row">
-          <span>⭐ Mark as important</span>
+          <span data-i18n="field.important">Mark as important</span>
           <input name="important" type="checkbox">
         </label>
 
-        <button class="pill-button primary submit-button" type="submit">Save</button>
+        <button class="pill-button primary submit-button" type="submit" data-i18n="common.save">Save</button>
       </form>
     </div>
   </div>
@@ -242,65 +250,63 @@
     <div class="sheet-scrim" data-close-sheet="quick-sheet"></div>
     <div class="sheet-panel form-panel compact-panel">
       <div class="sheet-handle"></div>
-      <div class="sheet-head">
+      <div class="sheet-head minimal-head">
         <div>
-          <p class="sheet-kicker">Quick Task</p>
-          <h2>一秒开始</h2>
+          <h2 data-i18n="sheet.quick">Quick Start</h2>
         </div>
-        <button class="sheet-close" type="button" data-close-sheet="quick-sheet">✕</button>
+        <button class="sheet-close" type="button" data-close-sheet="quick-sheet">×</button>
       </div>
 
       <form id="quick-form" class="line-form">
         <label class="field-block">
-          <span>Task Name</span>
-          <input name="title" type="text" list="task-name-suggestions" placeholder="例如：去洗澡" required>
+          <span data-i18n="field.taskName">Task Name</span>
+          <input name="title" type="text" list="task-name-suggestions" data-i18n-placeholder="placeholder.quickStart" placeholder="Search or type a task" required>
         </label>
-        <button class="pill-button primary submit-button" type="submit">Start Now</button>
+        <button class="pill-button primary submit-button" type="submit" data-i18n="quick.startNow">Start Now</button>
       </form>
     </div>
   </div>
 
   <div class="sheet-layer hidden" id="log-sheet">
     <div class="sheet-scrim" data-close-sheet="log-sheet"></div>
-    <div class="sheet-panel form-panel">
+    <div class="sheet-panel form-panel compact-panel">
       <div class="sheet-handle"></div>
-      <div class="sheet-head">
+      <div class="sheet-head minimal-head">
         <div>
-          <p class="sheet-kicker">Log Time</p>
-          <h2>补录一段实际时间</h2>
+          <h2 data-i18n="sheet.log">Log Time</h2>
         </div>
-        <button class="sheet-close" type="button" data-close-sheet="log-sheet">✕</button>
+        <button class="sheet-close" type="button" data-close-sheet="log-sheet">×</button>
       </div>
 
       <form id="log-form" class="line-form">
         <input name="taskId" type="hidden">
         <label class="field-block">
-          <span>Task</span>
-          <input name="title" type="text" list="task-name-suggestions" placeholder="选择已有任务或新建一个" required>
+          <span data-i18n="field.task">Task</span>
+          <input name="title" type="text" list="task-name-suggestions" data-i18n-placeholder="placeholder.logTask" placeholder="Choose or type a task" required>
         </label>
 
         <button class="select-row" id="log-category-button" type="button">
-          <span>Category</span>
-          <strong id="log-category-value">可选</strong>
+          <span data-i18n="field.category">Category</span>
+          <strong id="log-category-value" data-i18n="field.optional">Optional</strong>
         </button>
 
         <label class="field-block inline-field">
-          <span>Date</span>
+          <span data-i18n="field.date">Date</span>
           <input name="date" type="date" required>
         </label>
 
         <div class="time-range">
           <label class="field-block">
-            <span>Start</span>
+            <span data-i18n="field.start">Start</span>
             <input name="startTime" type="time" required>
           </label>
           <label class="field-block">
-            <span>End</span>
+            <span data-i18n="field.end">End</span>
             <input name="endTime" type="time" required>
           </label>
         </div>
 
-        <button class="pill-button primary submit-button" type="submit">Save</button>
+        <button class="pill-button primary submit-button" type="submit" data-i18n="common.save">Save</button>
       </form>
     </div>
   </div>
@@ -309,24 +315,23 @@
     <div class="sheet-scrim" data-close-sheet="start-sheet"></div>
     <div class="sheet-panel form-panel compact-panel">
       <div class="sheet-handle"></div>
-      <div class="sheet-head">
+      <div class="sheet-head minimal-head">
         <div>
-          <p class="sheet-kicker">Start Timer</p>
-          <h2>挑一件事，现在开始</h2>
+          <h2>Start Timer</h2>
         </div>
-        <button class="sheet-close" type="button" data-close-sheet="start-sheet">✕</button>
+        <button class="sheet-close" type="button" data-close-sheet="start-sheet">×</button>
       </div>
 
       <form id="start-form" class="line-form">
         <input name="taskId" type="hidden">
         <label class="field-block">
           <span>Task</span>
-          <input name="title" type="text" list="task-name-suggestions" placeholder="例如：英语听力" required>
+          <input name="title" type="text" list="task-name-suggestions" placeholder="Type a task" required>
         </label>
 
         <button class="select-row" id="start-category-button" type="button">
           <span>Category</span>
-          <strong id="start-category-value">可选</strong>
+          <strong id="start-category-value">Optional</strong>
         </button>
 
         <button class="pill-button primary submit-button" type="submit">Start Now</button>
@@ -336,58 +341,60 @@
 
   <div class="sheet-layer hidden" id="category-sheet">
     <div class="sheet-scrim" data-close-sheet="category-sheet"></div>
-    <div class="sheet-panel category-panel">
+    <div class="sheet-panel category-panel compact-panel">
       <div class="sheet-handle"></div>
-      <div class="sheet-head">
+      <div class="sheet-head minimal-head">
         <div>
-          <p class="sheet-kicker">Categories</p>
-          <h2>一级 > 二级 > 三级</h2>
+          <h2 data-i18n="sheet.categories">Categories</h2>
         </div>
-        <button class="sheet-close" type="button" data-close-sheet="category-sheet">✕</button>
+        <button class="sheet-close" type="button" data-close-sheet="category-sheet">×</button>
       </div>
 
       <div class="category-toolbar">
-        <button class="text-link" id="category-back-button" type="button">返回上一级</button>
-        <button class="text-link" id="category-clear-button" type="button">不设置分类</button>
+        <button class="text-link" id="category-back-button" type="button" data-i18n="common.back">Back</button>
+        <button class="text-link" id="category-clear-button" type="button" data-i18n="common.clear">Clear</button>
       </div>
 
-      <div class="category-path" id="category-path">还没有选择分类</div>
+      <div class="category-path" id="category-path">No category selected</div>
       <div class="category-list" id="category-list"></div>
     </div>
   </div>
 
   <div class="sheet-layer hidden" id="template-sheet">
     <div class="sheet-scrim" data-close-sheet="template-sheet"></div>
-    <div class="sheet-panel form-panel">
+    <div class="sheet-panel form-panel compact-panel">
       <div class="sheet-handle"></div>
-      <div class="sheet-head">
+      <div class="sheet-head minimal-head">
         <div>
-          <p class="sheet-kicker" id="template-sheet-kicker">Task Template</p>
-          <h2 id="template-sheet-title">新建一个分类模板</h2>
+          <p class="sheet-kicker" id="template-sheet-kicker">New Item</p>
+          <h2 id="template-sheet-title">Edit structure</h2>
         </div>
-        <button class="sheet-close" type="button" data-close-sheet="template-sheet">✕</button>
+        <button class="sheet-close" type="button" data-close-sheet="template-sheet">×</button>
       </div>
 
       <form id="template-form" class="line-form">
         <input name="templateId" type="hidden">
         <label class="field-block">
-          <span>一级分类</span>
-          <input name="folder" type="text" placeholder="例如：学习" required>
+          <span data-i18n="tasks.folder">Top Level</span>
+          <input name="folder" type="text" data-i18n-placeholder="placeholder.folder" placeholder="Study" required>
         </label>
         <label class="field-block">
-          <span>二级分类</span>
-          <input name="category" type="text" placeholder="例如：数学" required>
+          <span data-i18n="tasks.category">Category</span>
+          <input name="category" type="text" data-i18n-placeholder="placeholder.category" placeholder="Math" required>
         </label>
         <label class="field-block">
-          <span>三级分类</span>
-          <input name="action" type="text" placeholder="例如：做题" required>
+          <span data-i18n="tasks.taskName">Task</span>
+          <input name="action" type="text" data-i18n-placeholder="placeholder.action" placeholder="Do Exercises" required>
         </label>
         <label class="field-block inline-field">
-          <span>默认时长 (optional)</span>
+          <span data-i18n="tasks.defaultDuration">Default Duration (optional)</span>
           <input name="defaultDurationMinutes" type="number" min="5" step="5" placeholder="30">
         </label>
-        <div class="palette-picker" id="template-color-picker"></div>
-        <button class="pill-button primary submit-button" type="submit">保存模板</button>
+        <div class="field-block color-field">
+          <span data-i18n="field.color">Color</span>
+          <div class="palette-picker compact-picker" id="template-color-picker"></div>
+        </div>
+        <button class="pill-button primary submit-button" type="submit" data-i18n="common.save">Save</button>
       </form>
     </div>
   </div>
@@ -396,22 +403,19 @@
     <div class="sheet-scrim" data-close-sheet="home-task-sheet"></div>
     <div class="sheet-panel compact-panel action-panel">
       <div class="sheet-handle"></div>
-      <div class="sheet-head">
+      <div class="sheet-head minimal-head">
         <div>
-          <p class="sheet-kicker">Task Shortcut</p>
-          <h2 id="home-task-sheet-title">快速跳转</h2>
+          <h2 id="home-task-sheet-title">Task Options</h2>
         </div>
-        <button class="sheet-close" type="button" data-close-sheet="home-task-sheet">✕</button>
+        <button class="sheet-close" type="button" data-close-sheet="home-task-sheet">×</button>
       </div>
 
-      <div class="action-grid">
+      <div class="action-grid compact-actions">
         <button class="action-card" id="home-task-edit-button" type="button">
-          <strong>Edit</strong>
-          <span>直接编辑这个任务模板</span>
+          <strong data-i18n="tasks.edit">Edit</strong>
         </button>
         <button class="action-card" id="home-task-category-button" type="button">
-          <strong>Change Category</strong>
-          <span>跳到 Tasks 页对应分类位置</span>
+          <strong data-i18n="tasks.changeCategory">Change Category</strong>
         </button>
       </div>
     </div>
