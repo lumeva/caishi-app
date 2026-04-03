@@ -1671,3 +1671,401 @@ select {
   color: #fff;
   box-shadow: 0 12px 24px rgba(59, 130, 255, 0.22);
 }
+
+.tasks-panel {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+.folder-block {
+  padding: 16px 16px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: 26px;
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.folder-block + .folder-block {
+  margin-top: 12px;
+}
+
+.folder-block:first-child {
+  padding-top: 16px;
+}
+
+.folder-block .category-stack {
+  margin-top: 10px;
+}
+
+.next-panel .empty-state,
+.todo-panel .empty-state {
+  min-height: 64px;
+  padding: 14px 16px;
+  border-radius: 18px;
+}
+
+.completed-panel {
+  margin-bottom: 12px;
+}
+
+@media (max-width: 430px) {
+  .app-shell {
+    padding: calc(env(safe-area-inset-top) + 10px) 12px calc(env(safe-area-inset-bottom) + 118px);
+  }
+
+  .view {
+    gap: 12px;
+  }
+
+  .panel {
+    border-radius: 24px;
+    padding: 14px;
+  }
+
+  .home-head {
+    padding: 0 2px;
+  }
+
+  .home-head h1 {
+    font-size: 2.2rem;
+  }
+
+  .home-date,
+  .section-kicker,
+  .sheet-kicker,
+  .helper-copy,
+  .task-meta,
+  .category-path,
+  .summary-label,
+  .stats-note {
+    font-size: 0.82rem;
+  }
+
+  .focus-timer {
+    top: calc(env(safe-area-inset-top) + 6px);
+    gap: 6px;
+    padding: 8px 10px 10px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+  }
+
+  .timer-row.primary {
+    gap: 6px;
+  }
+
+  .timer-inline-copy {
+    gap: 8px;
+  }
+
+  .timer-kicker {
+    min-width: 44px;
+    height: 30px;
+    padding: 0 8px;
+    font-size: 0.72rem;
+  }
+
+  .timer-title {
+    font-size: 0.96rem;
+  }
+
+  .timer-clock {
+    font-size: 1.45rem;
+  }
+
+  .timer-button,
+  .stop-button {
+    min-width: 46px;
+    min-height: 38px;
+    border-radius: 12px;
+    font-size: 0.86rem;
+  }
+
+  .next-panel {
+    padding-bottom: 12px;
+  }
+
+  .next-track {
+    gap: 10px;
+    margin-top: 12px;
+    grid-auto-columns: 82%;
+  }
+
+  .next-card {
+    min-height: 136px;
+    padding: 12px;
+    border-radius: 20px;
+  }
+
+  .next-time {
+    font-size: 1.12rem;
+  }
+
+  .next-title {
+    font-size: 1.42rem;
+  }
+
+  .page-dots {
+    margin-top: 8px;
+  }
+
+  .todo-panel {
+    gap: 14px;
+  }
+
+  .todo-group {
+    gap: 8px;
+  }
+
+  .group-head h3 {
+    font-size: 1.2rem;
+  }
+
+  .todo-list {
+    gap: 8px;
+  }
+
+  .todo-row {
+    padding: 12px 14px;
+    border-radius: 18px;
+  }
+
+  .todo-time {
+    min-width: 54px;
+    font-size: 0.98rem;
+  }
+
+  .todo-title {
+    font-size: 1.16rem;
+  }
+
+  .todo-meta {
+    margin-top: 4px;
+    gap: 6px;
+  }
+
+  .tag,
+  .time-chip,
+  .status-chip,
+  .completed-count,
+  .range-pill,
+  .badge {
+    min-height: 26px;
+    padding: 0 10px;
+    font-size: 0.82rem;
+  }
+
+  .inline-button,
+  .pill-button {
+    min-height: 38px;
+    padding: 0 14px;
+    border-radius: 14px;
+    font-size: 0.92rem;
+  }
+
+  .stats-panel {
+    gap: 14px;
+    padding-top: 10px;
+  }
+
+  .page-head.compact-head h1 {
+    font-size: 1.9rem;
+  }
+
+  .preset-row {
+    gap: 8px;
+  }
+
+  .range-pill,
+  .mode-pill {
+    min-height: 42px;
+    border-radius: 16px;
+  }
+
+  .stats-ring-card {
+    padding: 4px 0 0;
+  }
+
+  .stats-donut-wrap {
+    width: min(72vw, 286px);
+  }
+
+  .stats-center strong {
+    font-size: 2.2rem;
+  }
+
+  .stats-center span {
+    font-size: 0.94rem;
+  }
+
+  .stats-mode-row {
+    margin-top: 4px;
+  }
+
+  .stats-filter-row {
+    margin-top: 6px;
+  }
+
+  .stats-select {
+    min-height: 42px;
+    border-radius: 14px;
+  }
+
+  .stats-select select {
+    min-height: 42px;
+    font-size: 0.94rem;
+  }
+
+  .stats-detail-list {
+    gap: 8px;
+    padding-bottom: 4px;
+  }
+
+  .stats-detail-row {
+    padding: 12px 14px;
+    border-radius: 18px;
+  }
+
+  .stats-detail-note {
+    font-size: 0.78rem;
+  }
+
+  .trend-fold summary {
+    padding: 14px;
+  }
+
+  .tasks-topbar {
+    padding: 0 2px;
+  }
+
+  .tasks-topbar h1 {
+    font-size: 2rem;
+  }
+
+  .tasks-top-actions {
+    gap: 6px;
+  }
+
+  .icon-button,
+  .row-add {
+    min-width: 32px;
+    min-height: 32px;
+    padding: 0 8px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+  }
+
+  .folder-block {
+    padding: 14px 14px 10px;
+    border-radius: 22px;
+  }
+
+  .folder-name {
+    gap: 10px;
+    font-size: 1.24rem;
+  }
+
+  .folder-icon {
+    font-size: 1.3rem;
+  }
+
+  .folder-actions,
+  .category-actions,
+  .template-actions {
+    gap: 6px;
+  }
+
+  .row-action {
+    min-width: 32px;
+    min-height: 32px;
+    padding: 0 8px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+  }
+
+  .category-stack {
+    gap: 8px;
+    padding-left: 14px;
+  }
+
+  .category-row {
+    min-height: 42px;
+  }
+
+  .category-main {
+    gap: 8px;
+    font-size: 1.02rem;
+  }
+
+  .category-main.with-bar {
+    padding-left: 12px;
+  }
+
+  .category-tools {
+    gap: 8px;
+    padding-left: 18px;
+  }
+
+  .category-palette {
+    gap: 6px;
+  }
+
+  .color-mini {
+    width: 24px;
+    height: 24px;
+  }
+
+  .template-list {
+    gap: 8px;
+    padding-left: 16px;
+  }
+
+  .template-pill-row {
+    min-height: 36px;
+  }
+
+  .template-pill {
+    min-height: 30px;
+    padding: 0 12px;
+    font-size: 0.92rem;
+  }
+
+  .template-duration {
+    font-size: 0.8rem;
+  }
+
+  .settings-panel {
+    padding-top: 10px;
+  }
+
+  .language-button {
+    min-height: 48px;
+    border-radius: 16px;
+  }
+
+  .bottom-nav {
+    width: min(calc(100vw - 20px), 540px);
+    bottom: calc(env(safe-area-inset-bottom) + 8px);
+    padding: 8px;
+    gap: 6px;
+    border-radius: 22px;
+  }
+
+  .nav-item {
+    min-height: 44px;
+    border-radius: 16px;
+    font-size: 0.92rem;
+  }
+
+  .fab {
+    right: max(14px, calc((100vw - min(100vw, 540px)) / 2 + 12px));
+    bottom: calc(env(safe-area-inset-bottom) + 78px);
+    width: 62px;
+    height: 62px;
+  }
+
+  .fab span {
+    font-size: 2.2rem;
+  }
+}

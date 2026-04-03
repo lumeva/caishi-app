@@ -1227,6 +1227,10 @@ function buildStatsRows(entries) {
   const groups = new Map();
 
   filteredEntries.forEach((entry) => {
+    const minutes = entryDurationMinutes(entry);
+    if (minutes <= 0) {
+      return;
+    }
     const meta = getEntryStatsMeta(entry);
     const key = ui.statsMode === "task" ? meta.taskKey : meta.categoryKey;
     const label = ui.statsMode === "task" ? meta.taskLabel : meta.categoryLabel;
@@ -1239,7 +1243,7 @@ function buildStatsRows(entries) {
       minutes: 0,
       count: 0
     };
-    current.minutes += entryDurationMinutes(entry);
+    current.minutes += minutes;
     current.count += 1;
     groups.set(key, current);
   });
